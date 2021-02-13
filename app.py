@@ -54,5 +54,13 @@ pct_fta = (fta / number_of_games) * 100
 
 data = pd.DataFrame({'win_sums' : win_sums, 'loss_sums' : loss_sums})
 data['profitable'] = data.win_sums > data.loss_sums
-st.text("\n\nNon FTA games %: {}\nFTA games %: {}\n".format((non_fta/number_of_games)*100, ((fta/number_of_games)*100)))
-st.text("Average win : {}\nAverage loss: {}\nAverage profit: {}".format(data.win_sums.mean(), data.loss_sums.mean(), data.win_sums.mean() - data.loss_sums.mean()))
+
+non_fta_pct = np.round((non_fta/number_of_games)*100, 2)
+fta_pct = np.round((fta / number_of_games) * 100, 2)
+
+total_win_amount = np.round(sum(win_sums), 2)
+total_lose_amount = np.round(sum(loss_sums), 2)
+total_profit_amount = np.round((total_win_amount - total_lose_amount), 2)
+
+st.text(f"\n\nNon FTA games %: {non_fta_pct}\nFTA games %: {fta_pct}\n")
+st.text(f"Total win amount: {total_win_amount} \nTotal lose amount: {total_lose_amount} \nTotal profit amount: {total_profit_amount}")
